@@ -1,0 +1,18 @@
+# Dependencias y compilación
+node_modules/
+dist/
+
+# Archivos generados
+public/libarchive/
+tests/output/
+coverage/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Registros y temporales
+*.log
+npm-debug.log*

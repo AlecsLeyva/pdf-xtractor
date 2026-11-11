@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Extrae todos los PDF de tus archivos ZIP y RAR y descárgalos juntos en un único PDF_EXTRAIDOS.zip. Todo se procesa localmente en tu equipo."
+    />
+    <meta name="theme-color" content="#080b0c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PDF Extractor" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <title>PDF Extractor · Extrae todos tus PDF automáticamente</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero__top">
+          <a class="brand" href="./" aria-label="PDF Extractor, inicio">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none">
+                <path
+                  d="M9 4.5h9.2L25 11.3V25a2.5 2.5 0 0 1-2.5 2.5H9A2.5 2.5 0 0 1 6.5 25V7A2.5 2.5 0 0 1 9 4.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18 4.8v6.7h6.6"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M11 17.5h9M11 21h6.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M16 10.5v4.6m0 0-1.9-1.9m1.9 1.9 1.9-1.9"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="brand__text">
+              <span class="brand__name">PDF <strong>Extractor</strong></span>
+              <span class="brand__tagline">ZIP + RAR → un solo ZIP</span>
+            </span>
+          </a>
+
+          <div class="hero__badges">
+            <span class="privacy-badge">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect
+                  x="5"
+                  y="10.5"
+                  width="14"
+                  height="9.5"
+                  rx="2.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                />
+                <path
+                  d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+                <circle cx="12" cy="15.2" r="1.3" fill="currentColor" />
+              </svg>
+              Procesamiento 100 % local
+            </span>
+
+            <button id="installButton" class="btn btn--install" type="button" hidden>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3.5v10m0 0-3.8-3.8M12 13.5l3.8-3.8"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.5 15.5v2.5A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5v-2.5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Instalar aplicación
+            </button>
+          </div>
+        </div>
+
+        <div class="hero__content">
+          <p class="eyebrow">Extracción automática y privada</p>
+          <h1>Extrae todos tus PDF automáticamente</h1>
+          <p class="hero__lead">
+            Selecciona tus archivos comprimidos y la aplicación encontrará cada PDF, esté en la
+            carpeta que esté, para reunirlos en un único
+            <strong>PDF_EXTRAIDOS.zip</strong>.
+          </p>
+          <ul class="hero__features" aria-label="Ventajas">
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="m4.5 10.5 3.4 3.4 7.6-8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Sin subir archivos
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="m4.5 10.5 3.4 3.4 7.6-8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Sin cuentas ni registros
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="m4.5 10.5 3.4 3.4 7.6-8"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Varios ZIP y RAR a la vez
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="panel" aria-labelledby="upload-title">
+          <h2 id="upload-title" class="sr-only">Seleccionar archivos comprimidos</h2>
+
+          <div
+            id="dropzone"
+            class="dropzone"
+            role="group"
+            aria-describedby="dropHint"
+            aria-label="Zona para arrastrar y soltar archivos ZIP y RAR"
+          >
+            <div class="dropzone__icons" aria-hidden="true">
+              <span class="file-icon file-icon--zip">ZIP</span>
+              <span class="file-icon file-icon--rar">RAR</span>
+              <span class="merge-arrow">
+                <svg viewBox="0 0 32 16" fill="none">
+                  <path
+                    d="M2 8h25m0 0-5-5m5 5-5 5"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <span class="file-icon file-icon--pdf">PDF</span>
+            </div>
+
+            <p class="dropzone__title">Arrastra y suelta tus archivos ZIP y RAR</p>
+            <p class="dropzone__subtitle">o selecciónalos desde tu equipo</p>
+
+            <button id="selectButton" class="btn btn--primary" type="button">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 16V4m0 0-4 4m4-4 4 4"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Seleccionar archivos
+            </button>
+
+            <p id="dropHint" class="dropzone__hint">
+              Puedes elegir varios archivos a la vez · Se ignoran los archivos que no sean ZIP o
+              RAR
+            </p>
+
+            <input
+              id="fileInput"
+              type="file"
+              accept=".zip,.rar,application/zip,application/x-zip-compressed,application/vnd.rar,application/x-rar-compressed"
+              multiple
+              hidden
+            />
+          </div>
+
+          <p id="selectionNotice" class="notice" role="status" hidden></p>
+        </section>
+
+        <section id="filesPanel" class="panel" aria-labelledby="files-title" hidden>
+          <div class="panel__head">
+            <div>
+              <h2 id="files-title">Archivos seleccionados</h2>
+              <p class="panel__sub">
+                <span id="fileCount">0</span>
+                <span id="fileCountLabel">archivos</span>
+                · <span id="totalSize">0 B</span> · <span id="formatSummary">—</span>
+              </p>
+            </div>
+            <button id="clearButton" class="btn btn--ghost" type="button">
+              Limpiar selección
+            </button>
+          </div>
+
+          <ul id="fileList" class="file-list"></ul>
+        </section>
+
+        <section
+          id="optionsPanel"
+          class="panel options-panel"
+          aria-labelledby="options-title"
+          hidden
+        >
+          <div class="panel__head panel__head--tight">
+            <div>
+              <h2 id="options-title">Opciones de extracción</h2>
+              <p class="panel__sub">Puedes cambiarlas antes de pulsar el botón de extraer.</p>
+            </div>
+          </div>
+
+          <div class="options">
+            <fieldset class="option-group">
+              <legend>Nombre de los PDF extraídos</legend>
+              <label class="option-radio">
+                <input type="radio" name="namingMode" value="flat" checked />
+                <span>
+                  <strong>Mantener el nombre original</strong>
+                  <small
+                    >Los duplicados se renombran como documento_1.pdf, documento_2.pdf…</small
+                  >
+                </span>
+              </label>
+              <label class="option-radio">
+                <input type="radio" name="namingMode" value="archive-prefix" />
+                <span>
+                  <strong>Prefijar con el comprimido</strong>
+                  <small
+                    >Ejemplo: lote1_documento.pdf. Útil para saber de dónde viene cada
+                    PDF.</small
+                  >
+                </span>
+              </label>
+            </fieldset>
+
+            <div class="option-toggles">
+              <label class="option-check">
+                <input id="recursiveOption" type="checkbox" />
+                <span>
+                  <strong>Buscar dentro de comprimidos anidados</strong>
+                  <small
+                    >Abre ZIP y RAR que estén dentro de otro comprimido (hasta 2
+                    niveles).</small
+                  >
+                </span>
+              </label>
+
+              <label class="option-check">
+                <input id="validateOption" type="checkbox" />
+                <span>
+                  <strong>Comprobar que los PDF son válidos</strong>
+                  <small
+                    >Descarta archivos con extensión .pdf que no tengan una firma PDF
+                    real.</small
+                  >
+                </span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <div id="actionRow" class="action" hidden>
+          <button id="extractButton" class="btn btn--cta" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 3v11m0 0-4.2-4.2M12 14l4.2-4.2"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4.5 15.5v3A2.5 2.5 0 0 0 7 21h10a2.5 2.5 0 0 0 2.5-2.5v-3"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+              />
+            </svg>
+            Extraer PDF y crear ZIP
+          </button>
+          <p class="action__note">
+            Los archivos originales no se modifican ni se eliminan. Todo el proceso ocurre en tu
+            navegador.
+          </p>
+        </div>
+
+        <section
+          id="progressPanel"
+          class="panel progress-panel"
+          aria-labelledby="progress-title"
+          aria-live="polite"
+          hidden
+        >
+          <div class="panel__head panel__head--tight">
+            <div>
+              <h2 id="progress-title">Procesando archivos…</h2>
+              <p id="progressStage" class="panel__sub">Preparando la extracción</p>
+            </div>
+            <div class="progress__controls">
+              <span id="progressPercent" class="progress__percent">0 %</span>
+              <button id="cancelButton" class="btn btn--cancel" type="button">Cancelar</button>
+            </div>
+          </div>
+
+          <div
+            id="progressTrack"
+            class="progress__track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-labelledby="progress-title"
+          >
+            <div id="progressBar" class="progress__bar"></div>
+          </div>
+
+          <p id="currentFile" class="progress__current">
+            <span class="spinner" aria-hidden="true"></span>
+            <span id="currentFileText">Iniciando…</span>
+          </p>
+
+          <dl class="stats">
+            <div class="stat">
+              <dt>Comprimidos revisados</dt>
+              <dd id="statArchives">0 / 0</dd>
+            </div>
+            <div class="stat">
+              <dt>PDF encontrados</dt>
+              <dd id="statFound">0</dd>
+            </div>
+            <div class="stat">
+              <dt>PDF extraídos</dt>
+              <dd id="statExtracted">0</dd>
+            </div>
+            <div class="stat" id="statNestedWrapper" hidden>
+              <dt>Anidados abiertos</dt>
+              <dd id="statNested">0</dd>
+            </div>
+            <div class="stat stat--error">
+              <dt>Errores</dt>
+              <dd id="statErrors">0</dd>
+            </div>
+          </dl>
+
+          <p id="progressHint" class="progress__hint" hidden></p>
+        </section>
+
+        <section
+          id="resultsPanel"
+          class="panel results-panel"
+          aria-labelledby="results-title"
+          tabindex="-1"
+          hidden
+        >
+          <div class="results__head">
+            <span
+              id="resultIcon"
+              class="results__icon results__icon--success"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="m5 12.5 4.5 4.5L19 7.5"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <div>
+              <h2 id="results-title">¡Extracción completada!</h2>
+              <p id="resultMessage" class="results__message"></p>
+            </div>
+          </div>
+
+          <dl class="result-stats">
+            <div class="result-stat">
+              <dt>Comprimidos revisados</dt>
+              <dd id="resultArchives">0</dd>
+            </div>
+            <div class="result-stat">
+              <dt>Anidados abiertos</dt>
+              <dd id="resultNested">0</dd>
+            </div>
+            <div class="result-stat">
+              <dt>PDF encontrados</dt>
+              <dd id="resultFound">0</dd>
+            </div>
+            <div class="result-stat result-stat--highlight">
+              <dt>PDF extraídos</dt>
+              <dd id="resultExtracted">0</dd>
+            </div>
+            <div class="result-stat" id="resultErrorsStat">
+              <dt>Incidencias</dt>
+              <dd id="resultErrors">0</dd>
+            </div>
+          </dl>
+
+          <p id="resultNotes" class="result-notes" hidden></p>
+
+          <details id="extractedDetails" class="extracted-section" hidden>
+            <summary>PDF incluidos en el ZIP (<span id="extractedCount">0</span>)</summary>
+            <ul id="extractedList" class="extracted-list"></ul>
+            <p id="extractedMore" class="extracted-more" hidden></p>
+          </details>
+
+          <div id="errorSection" class="error-section" hidden>
+            <h3>Archivos que no se pudieron procesar</h3>
+            <ul id="errorList" class="error-list"></ul>
+          </div>
+
+          <div class="result-actions">
+            <button id="downloadButton" class="btn btn--download" type="button">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3.5v11m0 0-4.2-4.2M12 14.5l4.2-4.2"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M4.5 16v2.5A2.5 2.5 0 0 0 7 21h10a2.5 2.5 0 0 0 2.5-2.5V16"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Descargar PDF_EXTRAIDOS.zip
+            </button>
+            <button id="csvButton" class="btn btn--ghost" type="button" disabled>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M6 3.5h8.5L19 8v12.5H6V3.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14 3.8V8h4.2M9 12h6M9 15.5h6"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Descargar informe CSV
+            </button>
+            <button id="resetButton" class="btn btn--ghost" type="button">
+              Nueva extracción
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p class="footer__privacy">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path
+              d="M12 3.2 5 6.1v5.2c0 4.2 2.9 7.4 7 9.5 4.1-2.1 7-5.3 7-9.5V6.1L12 3.2Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+            <path
+              d="m8.8 12.1 2.2 2.2 4.2-4.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span
+            ><strong>Privacidad total:</strong> tus documentos no se envían a ningún servidor.
+            Se procesan con la memoria y la CPU de tu equipo.</span
+          >
+        </p>
+
+        <details class="footer__details">
+          <summary>Limitaciones conocidas</summary>
+          <ul>
+            <li>
+              Los RAR divididos en varios volúmenes (<code>.part1.rar</code>,
+              <code>.part2.rar</code>…) no están soportados: deben unirse en un único RAR.
+            </li>
+            <li>
+              Los comprimidos cifrados con contraseña no están soportados. Extráelos con 7-Zip o
+              WinRAR y vuelve a comprimirlos sin contraseña.
+            </li>
+            <li>
+              Los comprimidos anidados solo se abren si activas la opción correspondiente
+              (máximo 2 niveles y 100 comprimidos).
+            </li>
+            <li>
+              Los PDF dentro de comprimidos anidados también cuentan para el límite total de 1,5
+              GB descomprimidos.
+            </li>
+            <li>El tamaño máximo depende de la memoria RAM disponible en el equipo.</li>
+            <li>
+              Requiere un navegador moderno con WebAssembly y Web Workers (Chrome, Edge, Firefox
+              o Safari recientes).
+            </li>
+          </ul>
+        </details>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+# Normaliza los finales de línea a LF en todos los sistemas.
+* text=auto eol=lf
+
+# Archivos binarios (no convertir finales de línea).
+*.zip binary
+*.rar binary
+*.png binary
+*.ico binary
+*.wasm binary

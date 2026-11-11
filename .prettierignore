@@ -1,0 +1,8 @@
+dist/
+node_modules/
+public/libarchive/
+tests/output/
+tests/fixtures/
+coverage/
+package-lock.json
+*.png

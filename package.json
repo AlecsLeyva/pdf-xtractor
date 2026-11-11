@@ -1,0 +1,41 @@
+{
+  "name": "pdf-extractor",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Extrae todos los PDF de archivos ZIP y RAR directamente en tu navegador y genera un único PDF_EXTRAIDOS.zip",
+  "type": "module",
+  "scripts": {
+    "setup:libarchive": "node scripts/copy-libarchive.mjs",
+    "predev": "node scripts/copy-libarchive.mjs",
+    "dev": "vite",
+    "prebuild": "node scripts/copy-libarchive.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run build && node scripts/serve-dist.mjs",
+    "serve": "node scripts/serve-dist.mjs",
+    "icons": "node scripts/generate-icons.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test tests/utils.test.js tests/zip-writer.test.js tests/zip-extraction.test.js tests/rar-extraction.test.js",
+    "test:e2e": "npm run build && node tests/e2e.mjs",
+    "verify": "npm run lint && npm test && npm run build"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "libarchive.js": "^2.0.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^16.3.0",
+    "playwright": "^1.64.1",
+    "prettier": "^3.6.2",
+    "vite": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20.19"
+  }
+}
